@@ -1,0 +1,35 @@
+server:
+  port: 8093
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        input1:
+          destination: processed-messages1
+          binder: rabbit
+        input2:
+          destination: processed-messages2
+          binder: rabbit
+      binders:
+        rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: 127.0.0.1
+                port: 5672
+                username: guest
+                password: guest
+  datasource:
+    oracle:
+      jdbc-url: jdbc:oracle:thin:@211.238.138.197:1522/orcl
+      username: test
+      password: test
+      driver-class-name: oracle.jdbc.OracleDriver
+      database-platform: org.hibernate.dialect.Oracle10gDialect
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update

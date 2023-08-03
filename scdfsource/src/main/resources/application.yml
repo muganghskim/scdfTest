@@ -1,0 +1,44 @@
+server:
+  port: 8091
+
+spring:
+  datasource:
+    postgres:
+      jdbc-url: jdbc:postgresql://localhost:5432/testdb
+      username: test
+      password: test
+      driver-class-name: org.postgresql.Driver
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+#    oracle:
+#      jdbc-url: jdbc:oracle:thin:@211.238.138.197:1522/orcl
+#      username: test
+#      password: test
+#      driver-class-name: oracle.jdbc.OracleDriver
+#      database-platform: org.hibernate.dialect.Oracle10gDialect
+  jpa:
+    show-sql: true
+    model:
+      RcsData: update  #postgres
+#    oramodel:
+#      Rcs000Recovery: update  #oracle
+#      Rcs111Recovery: update  #oracle
+  cloud:
+    stream:
+      bindings:
+        output1:
+          destination: messages1
+          binder: rabbit
+        output2:
+          destination: messages2
+          binder: rabbit
+      binders:
+        rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: 127.0.0.1
+                port: 5672
+                username: guest
+                password: guest
+

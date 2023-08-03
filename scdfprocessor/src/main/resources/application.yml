@@ -1,0 +1,30 @@
+server:
+  port: 8092
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        input1:
+          destination: messages1
+          binder: rabbit
+        input2:
+          destination: messages2
+          binder: rabbit
+        output1:
+          destination: processed-messages1
+          binder: rabbit
+        output2:
+          destination: processed-messages2
+          binder: rabbit
+      binders:
+        rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: 127.0.0.1
+                port: 5672
+                username: guest
+                password: guest
+
